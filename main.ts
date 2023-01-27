@@ -1,20 +1,23 @@
-import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import {FileSystemAdapter, App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting} from 'obsidian';
+import {simpleGit, SimpleGit} from 'simple-git';
 
 // Remember to rename these classes and interfaces!
 
-interface MyPluginSettings {
+interface ObsidianEasyGitSettings {
 	mySetting: string;
 }
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
+const DEFAULT_SETTINGS: ObsidianEasyGitSettings = {
 	mySetting: 'default'
 }
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+export default class ObsidianEasyGit extends Plugin {
+	settings: ObsidianEasyGitSettings;
+	git: SimpleGit
 
 	async onload() {
 		await this.loadSettings();
+		await this.init();
 
 		// This creates an icon in the left ribbon.
 		const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
@@ -30,10 +33,11 @@ export default class MyPlugin extends Plugin {
 
 		// This adds a simple command that can be triggered anywhere
 		this.addCommand({
-			id: 'open-sample-modal-simple',
-			name: 'Open sample modal (simple)',
+			id: 'Git commit',
+			name: 'commit source',
 			callback: () => {
-				new SampleModal(this.app).open();
+				this.gitcommit();
+				/* new SampleModal(this.app).open(); */
 			}
 		});
 		// This adds an editor command that can perform some operation on the current editor instance
@@ -89,6 +93,31 @@ export default class MyPlugin extends Plugin {
 	async saveSettings() {
 		await this.saveData(this.settings);
 	}
+
+	async init() {
+		const adapter = this.app.vault.adapter as FileSystemAdapter;
+		const path = adapter.getBasePath();
+		let basePath = path;
+		this.git = simpleGit({
+			baseDir: basePath,
+			binary: 'git',
+			config: ["core.quotepath=off"]
+		});
+	}
+
+	async pull() {
+		this.git.pull()
+	}
+
+	async push() {
+		this.git.push()
+	}
+
+	async gitcommit() {
+		const msg=Date.parse(new Date().toString()).toString()
+		this.git.add(".")
+		this.git.commit(msg)
+	}
 }
 
 class SampleModal extends Modal {
@@ -108,9 +137,9 @@ class SampleModal extends Modal {
 }
 
 class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+	plugin: ObsidianEasyGit;
 
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: ObsidianEasyGit) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
