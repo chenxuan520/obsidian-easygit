@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
 	"description": "An easy git plugin for coder",
-	"author": "chencuan",
+	"author": "chenxuan",
 	"authorUrl": "https://chenxuanweb.top",
 	"isDesktopOnly": true
 }
