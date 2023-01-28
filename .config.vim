@@ -32,9 +32,9 @@ let g:Term_project_task=[
 			\'name'       : 'run',
 			\'command'    : 'cp ./manifest.json ./main.js ./styles.css /file/xiaozhu/go/src/dian/coa/demo/demo/.obsidian/plugins/obsidian-easygit/',
 			\'path'       : s:root,
-			\'close'      : 0,
-			\'type'       : 'vsplit',
-			\'key'        : '\2',
+			\'close'      : 2,
+			\'quickfix'   : 1,
+			\'type'       : 'split',
 			\},
 			\]
 
