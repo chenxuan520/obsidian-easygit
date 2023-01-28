@@ -1,9 +1,9 @@
 {
 	"id": "easygit",
-	"name": "easygit",
+	"name": "Easygit",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "this is a easy git plug for coder",
+	"description": "An easy git plugin for coder",
 	"author": "chencuan",
 	"authorUrl": "https://chenxuanweb.top",
 	"isDesktopOnly": true
