@@ -1,6 +1,6 @@
 {
-	"id": "obsidian-easygit",
-	"name": "obsidian-easygit",
+	"id": "easygit",
+	"name": "easygit",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
 	"description": "this is a easy git plug for coder",
