@@ -4,12 +4,10 @@ import {simpleGit, SimpleGit} from 'simple-git';
 // Remember to rename these classes and interfaces!
 
 interface ObsidianEasyGitSettings {
-	afterShell: string;
 	icon: boolean;
 }
 
 const DEFAULT_SETTINGS: ObsidianEasyGitSettings = {
-	afterShell: '',
 	icon: true
 }
 
